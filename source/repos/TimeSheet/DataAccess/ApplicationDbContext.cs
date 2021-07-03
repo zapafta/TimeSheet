@@ -18,11 +18,11 @@ namespace DataAccess
         }
 
 
-        public virtual DbSet<Person> Person { get; set; }
-      
-
-
-
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Localizacao> Localizacao { get; set; }
+        public virtual DbSet<TipoServico> TipoServico { get; set; }
+        public virtual DbSet<HistoricoLocalizacao> HistoricoLocalizacao { get; set; }
+        public virtual DbSet<Evento> Evento { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         {

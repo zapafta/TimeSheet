@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess.Models
 {
-    public class Person
+ public class TipoServico
     {
 
         [Key]
@@ -14,12 +18,12 @@ namespace DataAccess.Models
         public Guid Id { get; set; }
 
         [Display(Order = 1)]
-        [Required(ErrorMessage = "Name is required")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Descrição is required")]
+        public string Descrição { get; set; }
 
         [Display(Order = 2)]
-        [Required(ErrorMessage = "BirthDate is required")]
-        public DateTime BirthDate { get; set; }
+        [Required(ErrorMessage = "Dias is required")]
+        public int Dias { get; set; }
 
 
     }

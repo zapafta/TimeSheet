@@ -1,11 +1,43 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div>
-    <ejs-calendar id="calendar"></ejs-calendar>
+<div class="col-lg-12 control-section">
+    <div class="content-wrapper" style="max-width: 100%">
+        <ejs-dashboardlayout id="dynamicLayout" allowResizing="true" columns="9" >
+            <e-dashboardlayout-panels>
+
+
+
+                <e-dashboardlayout-panel row="0" col="0" sizeX="2" sizeY="9" content="<div></div>" header="<div>Panel 3</div>">
+                </e-dashboardlayout-panel>
+
+                <e-dashboardlayout-panel id="TESTE" row="1" col="0" sizeX="6" sizeY="2" content=" <div style='margin:50px; text-align:center'> <p class='h3'>  2021-05-04 15:30 -   <strong>  Amanhã as 15:30</strong></p><button style='Z-index:2000' id='btnCreateEvent'>Create Event</button> </div>"
+                                         header="<div><strong>Próximo bloco disponível</strong></div>">
+
+                </e-dashboardlayout-panel>
+
+
+            </e-dashboardlayout-panels>
+        </ejs-dashboardlayout>
+    </div>
+    <div id="content"></div>
 </div>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps ASDASDASD ASP.NET Core</a>.</p>
-</div>
-<ejs-schedule id="schedule" height="650px" selectedDate="new DateTime(2019, 1, 10)"></ejs-schedule>
+
+
+<script>
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+    }
+
+</script>

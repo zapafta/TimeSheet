@@ -43,6 +43,9 @@ namespace TimeSheet
                     .EnableSensitiveDataLogging() // <-- These two calls are optional but help
                     .EnableDetailedErrors()       // <-- with debugging (remove for production).
             );
+            services
+          .AddControllersWithViews()
+          .AddRazorRuntimeCompilation();
 
 
 

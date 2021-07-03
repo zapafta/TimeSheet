@@ -10,22 +10,22 @@ using DataAccess.Models;
 
 namespace TimeSheet.Controllers
 {
-    public class PeopleController : Controller
+    public class TipoServicoesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public PeopleController(ApplicationDbContext context)
+        public TipoServicoesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: People
+        // GET: TipoServicoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Person.ToListAsync());
+            return View(await _context.TipoServico.ToListAsync());
         }
 
-        // GET: People/Details/5
+        // GET: TipoServicoes/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -33,40 +33,40 @@ namespace TimeSheet.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person
+            var tipoServico = await _context.TipoServico
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (person == null)
+            if (tipoServico == null)
             {
                 return NotFound();
             }
 
-            return View(person);
+            return View(tipoServico);
         }
 
-        // GET: People/Create
+        // GET: TipoServicoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: People/Create
+        // POST: TipoServicoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,BirthDate")] Person person)
+        public async Task<IActionResult> Create([Bind("Id,Descrição,Dias")] TipoServico tipoServico)
         {
             if (ModelState.IsValid)
             {
-                person.Id = Guid.NewGuid();
-                _context.Add(person);
+                tipoServico.Id = Guid.NewGuid();
+                _context.Add(tipoServico);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(person);
+            return View(tipoServico);
         }
 
-        // GET: People/Edit/5
+        // GET: TipoServicoes/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace TimeSheet.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person.FindAsync(id);
-            if (person == null)
+            var tipoServico = await _context.TipoServico.FindAsync(id);
+            if (tipoServico == null)
             {
                 return NotFound();
             }
-            return View(person);
+            return View(tipoServico);
         }
 
-        // POST: People/Edit/5
+        // POST: TipoServicoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,BirthDate")] Person person)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Descrição,Dias")] TipoServico tipoServico)
         {
-            if (id != person.Id)
+            if (id != tipoServico.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace TimeSheet.Controllers
             {
                 try
                 {
-                    _context.Update(person);
+                    _context.Update(tipoServico);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonExists(person.Id))
+                    if (!TipoServicoExists(tipoServico.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +114,10 @@ namespace TimeSheet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(person);
+            return View(tipoServico);
         }
 
-        // GET: People/Delete/5
+        // GET: TipoServicoes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -125,30 +125,30 @@ namespace TimeSheet.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person
+            var tipoServico = await _context.TipoServico
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (person == null)
+            if (tipoServico == null)
             {
                 return NotFound();
             }
 
-            return View(person);
+            return View(tipoServico);
         }
 
-        // POST: People/Delete/5
+        // POST: TipoServicoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var person = await _context.Person.FindAsync(id);
-            _context.Person.Remove(person);
+            var tipoServico = await _context.TipoServico.FindAsync(id);
+            _context.TipoServico.Remove(tipoServico);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonExists(Guid id)
+        private bool TipoServicoExists(Guid id)
         {
-            return _context.Person.Any(e => e.Id == id);
+            return _context.TipoServico.Any(e => e.Id == id);
         }
     }
 }
