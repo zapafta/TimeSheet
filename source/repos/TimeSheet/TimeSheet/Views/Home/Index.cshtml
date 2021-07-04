@@ -1,30 +1,77 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
 <div class="col-lg-12 control-section">
     <div class="content-wrapper" style="max-width: 100%">
-        <ejs-dashboardlayout id="dynamicLayout" allowResizing="true" columns="9" >
-            <e-dashboardlayout-panels>
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border">
+                <p>Proximo bloco disponivel</p>
+                <p> <h3>Amanhã está disponivel as 14 : 00  </h3> 2021-03-08 15:00  </p>
+
+                <button>Criar Registo</button>
+
+            </div>
+            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
+                <p>Serviços realizados</p>
+                <p> <h3> esta semana <strong style="color:green">25 </strong></h3>🔼</p>
+                <p>Semana passada <strong>12</strong></p>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border" style=" margin-top:10px">
+
+                <div class="control-section">
+
+                    <ejs-grid id="Grid" allowPaging="true">
+                        <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+                        <e-grid-columns>
+                            <e-grid-column headerText="Cliente"></e-grid-column>
+                            <e-grid-column headerText="Tipo Serviço"></e-grid-column>
+                            <e-grid-column headerText="Data Hora"></e-grid-column>
+                            <e-grid-column headerText="Faltam"></e-grid-column>
 
 
 
-                <e-dashboardlayout-panel row="0" col="0" sizeX="2" sizeY="9" content="<div></div>" header="<div>Panel 3</div>">
-                </e-dashboardlayout-panel>
+                        </e-grid-columns>
+                    </ejs-grid>
 
-                <e-dashboardlayout-panel id="TESTE" row="1" col="0" sizeX="6" sizeY="2" content=" <div style='margin:50px; text-align:center'> <p class='h3'>  2021-05-04 15:30 -   <strong>  Amanhã as 15:30</strong></p><button style='Z-index:2000' id='btnCreateEvent'>Create Event</button> </div>"
-                                         header="<div><strong>Próximo bloco disponível</strong></div>">
-
-                </e-dashboardlayout-panel>
+                </div>
 
 
-            </e-dashboardlayout-panels>
-        </ejs-dashboardlayout>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
+            </div>
+        </div>
+
+
     </div>
-    <div id="content"></div>
-</div>
+
+    </div>
 
 
-<script>
+<script type="text/javascript">
+
+
     var x = document.getElementById("demo");
 
     function getLocation() {

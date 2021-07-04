@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -41,6 +42,11 @@ namespace DataAccess.Models
         [Display(Order = 6)]
         [Required(ErrorMessage = "Rating is required")]
         public int Rating { get; set; }
+
+
+        [Display(Order =7)]
+        [Required(ErrorMessage = "Status is required")]
+        public EnumStatus Status { get; set; }
 
 
 

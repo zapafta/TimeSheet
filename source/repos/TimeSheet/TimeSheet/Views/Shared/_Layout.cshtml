@@ -44,12 +44,13 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+     
 
             @RenderBody()
             <!-- Syncfusion Essential JS 2 ScriptManager -->
-
-        </main>
+            <ejs-scripts></ejs-scripts>
+            @RenderSection("ControlsSection", required: false)
+       
     </div>
 
     <footer class="border-top footer text-muted">
