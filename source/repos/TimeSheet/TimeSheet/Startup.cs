@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess;
+using DataAccess.Repository;
 
 namespace TimeSheet
 {
@@ -47,8 +48,12 @@ namespace TimeSheet
           .AddControllersWithViews()
           .AddRazorRuntimeCompilation();
 
-
-
+            services.AddTransient<ClienteRepository>();
+            services.AddTransient<ColaboradorRepository>();
+            services.AddTransient<EventoRepository>();
+            services.AddTransient<LocalizacaoRepository>();
+            services.AddTransient<TipoServicoRepository>();
+           
 
         }
 

@@ -10,22 +10,22 @@ using DataAccess.Models;
 
 namespace TimeSheet.Controllers
 {
-    public class EventoesController : Controller
+    public class ColaboradorsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public EventoesController(ApplicationDbContext context)
+        public ColaboradorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Eventoes
+        // GET: Colaboradors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Evento.ToListAsync());
+            return View(await _context.Colaborador.ToListAsync());
         }
 
-        // GET: Eventoes/Details/5
+        // GET: Colaboradors/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -33,40 +33,40 @@ namespace TimeSheet.Controllers
                 return NotFound();
             }
 
-            var evento = await _context.Evento
+            var colaborador = await _context.Colaborador
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (evento == null)
+            if (colaborador == null)
             {
                 return NotFound();
             }
 
-            return View(evento);
+            return View(colaborador);
         }
 
-        // GET: Eventoes/Create
+        // GET: Colaboradors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Eventoes/Create
+        // POST: Colaboradors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descrição,Obs,Rating")] Evento evento)
+        public async Task<IActionResult> Create([Bind("Id,Nome,BirthDate")] Colaborador colaborador)
         {
             if (ModelState.IsValid)
             {
-                evento.Id = Guid.NewGuid();
-                _context.Add(evento);
+                colaborador.Id = Guid.NewGuid();
+                _context.Add(colaborador);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(evento);
+            return View(colaborador);
         }
 
-        // GET: Eventoes/Edit/5
+        // GET: Colaboradors/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace TimeSheet.Controllers
                 return NotFound();
             }
 
-            var evento = await _context.Evento.FindAsync(id);
-            if (evento == null)
+            var colaborador = await _context.Colaborador.FindAsync(id);
+            if (colaborador == null)
             {
                 return NotFound();
             }
-            return View(evento);
+            return View(colaborador);
         }
 
-        // POST: Eventoes/Edit/5
+        // POST: Colaboradors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Descrição,Obs,Rating")] Evento evento)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Nome,BirthDate")] Colaborador colaborador)
         {
-            if (id != evento.Id)
+            if (id != colaborador.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace TimeSheet.Controllers
             {
                 try
                 {
-                    _context.Update(evento);
+                    _context.Update(colaborador);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventoExists(evento.Id))
+                    if (!ColaboradorExists(colaborador.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +114,10 @@ namespace TimeSheet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(evento);
+            return View(colaborador);
         }
 
-        // GET: Eventoes/Delete/5
+        // GET: Colaboradors/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -125,30 +125,30 @@ namespace TimeSheet.Controllers
                 return NotFound();
             }
 
-            var evento = await _context.Evento
+            var colaborador = await _context.Colaborador
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (evento == null)
+            if (colaborador == null)
             {
                 return NotFound();
             }
 
-            return View(evento);
+            return View(colaborador);
         }
 
-        // POST: Eventoes/Delete/5
+        // POST: Colaboradors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var evento = await _context.Evento.FindAsync(id);
-            _context.Evento.Remove(evento);
+            var colaborador = await _context.Colaborador.FindAsync(id);
+            _context.Colaborador.Remove(colaborador);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EventoExists(Guid id)
+        private bool ColaboradorExists(Guid id)
         {
-            return _context.Evento.Any(e => e.Id == id);
+            return _context.Colaborador.Any(e => e.Id == id);
         }
     }
 }
