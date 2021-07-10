@@ -3,14 +3,16 @@ using System;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210710103807_add ColaboradorToEvento")]
+    partial class addColaboradorToEvento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,20 +83,17 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid?>("ClienteId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("ColaboradorId")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("Descrição")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("IdCliente")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("IdColaborador")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("IdLocalizacao")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("IdTipoServico")
+                    b.Property<Guid?>("LocalizacaoId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Obs")
@@ -107,15 +106,18 @@ namespace DataAccess.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("TipoServicoId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCliente");
+                    b.HasIndex("ClienteId");
 
-                    b.HasIndex("IdColaborador");
+                    b.HasIndex("ColaboradorId");
 
-                    b.HasIndex("IdLocalizacao");
+                    b.HasIndex("LocalizacaoId");
 
-                    b.HasIndex("IdTipoServico");
+                    b.HasIndex("TipoServicoId");
 
                     b.ToTable("Evento");
                 });
@@ -206,27 +208,19 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Models.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("IdCliente")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ClienteId");
 
                     b.HasOne("DataAccess.Models.Colaborador", "Colaborador")
                         .WithMany()
-                        .HasForeignKey("IdColaborador")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ColaboradorId");
 
                     b.HasOne("DataAccess.Models.Localizacao", "Localizacao")
                         .WithMany()
-                        .HasForeignKey("IdLocalizacao")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("LocalizacaoId");
 
                     b.HasOne("DataAccess.Models.TipoServico", "TipoServico")
                         .WithMany()
-                        .HasForeignKey("IdTipoServico")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("TipoServicoId");
 
                     b.Navigation("Cliente");
 

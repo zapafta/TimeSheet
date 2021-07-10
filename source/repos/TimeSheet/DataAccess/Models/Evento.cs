@@ -24,29 +24,41 @@ namespace DataAccess.Models
 
         [Display(Order = 2)]
         [Required(ErrorMessage = "Cliente is required")]
+        [ForeignKey("Cliente")]
+        public Guid IdCliente { get; set; }
         public Cliente Cliente { get; set; }
 
         [Display(Order = 3)]
-        [Required(ErrorMessage = "Cliente is required")]
+        [Required(ErrorMessage = "Localizacao is required")]
+        [ForeignKey("Localizacao")]
+        public Guid IdLocalizacao { get; set; }
         public Localizacao Localizacao { get; set; }
-
 
         [Display(Order = 4)]
         [Required(ErrorMessage = "TipoServico is required")]
+        [ForeignKey("TipoServico")]
+        public Guid IdTipoServico { get; set; }
         public TipoServico TipoServico { get; set; }
 
         [Display(Order = 5)]
-        [Required(ErrorMessage = "Descrição is required")]
+        [Required(ErrorMessage = "Obs is required")]
         public string Obs { get; set; }
 
         [Display(Order = 6)]
         [Required(ErrorMessage = "Rating is required")]
-        public int Rating { get; set; }
+        public EnumRating Rating { get; set; }
 
 
         [Display(Order =7)]
         [Required(ErrorMessage = "Status is required")]
         public EnumStatus Status { get; set; }
+
+
+        [Display(Order = 8)]
+        [Required(ErrorMessage = "Colaborador is required")]
+        [ForeignKey("Colaborador")]
+        public Guid IdColaborador { get; set; }
+        public Colaborador Colaborador { get; set; }
 
 
 

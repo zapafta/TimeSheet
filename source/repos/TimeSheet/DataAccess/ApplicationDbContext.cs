@@ -22,10 +22,24 @@ namespace DataAccess
         public virtual DbSet<Localizacao> Localizacao { get; set; }
         public virtual DbSet<TipoServico> TipoServico { get; set; }
         public virtual DbSet<HistoricoLocalizacao> HistoricoLocalizacao { get; set; }
+
+        public virtual DbSet<Colaborador> Colaborador { get; set; }
         public virtual DbSet<Evento> Evento { get; set; }
+
+        public virtual DbSet<ColaboradorXTipoServico> ColaboradorXTipoServico { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         {
+
+            modelBuilder.Entity<ColaboradorXTipoServico>()
+       .HasKey(c => new { c.IdColaborador, c.IdTipoServico });
+
+            modelBuilder.Entity<ColaboradorXTipoServico>()
+                .HasOne(bc => bc.Colaborador)
+                .WithMany(b => b.ColaboradorXTipoServico)
+                .HasForeignKey(bc => bc.IdColaborador)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()
