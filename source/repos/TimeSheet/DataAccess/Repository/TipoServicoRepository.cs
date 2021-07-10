@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.ExtraModels;
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-   public class TipoServicoRepository
+    public class TipoServicoRepository
     {
         ApplicationDbContext context;
         public TipoServicoRepository(ApplicationDbContext pContext)
@@ -26,5 +27,21 @@ namespace DataAccess.Repository
         }
 
 
+        public List<SampleObject> GetAllTipoServicoToObjectSample()
+        {
+
+
+            var ListReturn = context.TipoServico.Select(t => new SampleObject()
+            {
+                Id=t.Id,
+                Description=t.Descrição
+
+            }).ToList();
+
+            return ListReturn;
+        }
+
     }
+
 }
+

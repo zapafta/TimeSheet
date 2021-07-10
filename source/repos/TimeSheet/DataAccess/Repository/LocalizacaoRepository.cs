@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.ExtraModels;
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,18 @@ namespace DataAccess.Repository
             context = pContext;
         }
 
-        public List<Localizacao> GetAllLocalizacao()
+        public List<SampleObject> GetAllLocalizacao()
         {
-            return context.Localizacao.ToList();
+         
+            var ListReturn = context.Localizacao.Select(t => new SampleObject()
+            {
+                Id = t.Id,
+                Description = t.Descrição
+
+            }).ToList();
+
+            return ListReturn;
+
         }
 
         public Localizacao GetColaboradorById(Guid IdLocalizacao)

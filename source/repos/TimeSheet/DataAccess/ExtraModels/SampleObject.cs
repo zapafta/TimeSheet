@@ -8,7 +8,9 @@ namespace DataAccess.ExtraModels
 {
     public class SampleObject
     {
-        public Guid Guid { get; set; }
+        public Guid Id { get; set; }
         public string Description { get; set; }
+
+        public int IdInt { get; set; }
     }
 }

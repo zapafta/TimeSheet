@@ -1,0 +1,97 @@
+﻿@model EventoModelView
+@{
+
+    DateTime MinTime = new DateTime(2020, 01, 01, 8, 0, 0);
+    DateTime MaxTime = new DateTime(2020, 01, 01, 20, 0, 0);
+    ViewData["Title"] = "Index";
+}
+<div class="e-content">
+    <ejs-dialog id="DialogInternal"
+                enableResize="true"
+                allowDragging="true"
+                enablePersistence="true"
+                enableHtmlSanitizer="true"
+                footerTemplate="<button id='btdialogInternal'>Criar Evento</button>"
+                showCloseIcon="true" close="true" cssClass="dialog-gant-min-height" height="350" width="750"  header="" visible="false">
+
+        <e-content-template>
+            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        <ejs-dropdownlist id="ddColaborador"
+                                          floatLabelType="Always"
+                                          placeholder=" Colaborador"
+                                          dataSource="@Model.Colaboradores"
+                                          value="@("")" index="2">
+                            <e-dropdownlist-fields text="Description" value="Id"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+
+
+
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        <ejs-dropdownlist id="ddTipoServico"
+                                          floatLabelType="Always"
+                                          placeholder=" Tipo de serviço"
+                                          dataSource="@Model.TiposDeServico"
+                                          value="@("")" index="2">
+                            <e-dropdownlist-fields text="Description" value="Id"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        <ejs-dropdownlist id="ddLocalizacao"
+                                          floatLabelType="Always"
+                                          placeholder=" Localizacao"
+                                          dataSource="@Model.Localizacoes"
+                                          value="@("")" index="2">
+                            <e-dropdownlist-fields text="Description" value="Id"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        <ejs-datepicker id="AddWorksheetDate" placeholder="📅 Data"
+                                        value="DateTime.Now.AddDays(-1)" allowEdit="false"
+                                        format="yyyy/MM/dd"
+                                        
+                                        floatLabelType="Always"></ejs-datepicker>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        <ejs-timepicker id="TimeStart" floatLabelType="Always" max="MaxTime" min="MinTime" placeholder="Inicio 🕙" openOnFocus="true" format="H:mm" step="15"></ejs-timepicker>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        <ejs-timepicker id="TimeEnd" floatLabelType="Always" max="MaxTime" min="MinTime" placeholder="Fim 🕙" openOnFocus="true" format="H:mm" step="15"></ejs-timepicker>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        <ejs-dropdownlist id="ddCliente"
+                                          placeholder="Cliente"
+                                          floatLabelType="Always"
+                                          dataSource="@Model.Clientes"
+                                          value="@("")" index="2">
+                            <e-dropdownlist-fields text="Description" value="Id"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        Rating : 0
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                        <ejs-dropdownlist id="ddStatus"
+                                          placeholder="Estado"
+                                          floatLabelType="Always"
+                                          dataSource="@Model.ListStatus"
+                                          enabled="false"
+                                          value="1" index="2">
+                            <e-dropdownlist-fields text="Description" value="IdInt"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </e-content-template>
+    </ejs-dialog>
+</div>

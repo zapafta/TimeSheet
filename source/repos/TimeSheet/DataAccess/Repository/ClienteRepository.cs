@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.ExtraModels;
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,20 @@ namespace DataAccess.Repository
             return context.Cliente.FirstOrDefault(t => t.Id == IdCliente);
         }
 
+
+        public List<SampleObject> GetAllClienteSampleObject()
+        {
+
+            var ListReturn = context.Cliente.Select(t => new SampleObject()
+            {
+                Id = t.Id,
+                Description = t.Nome
+
+            }).ToList();
+
+            return ListReturn;
+
+        }
 
     }
 }

@@ -16,8 +16,9 @@ namespace TimeSheet.Models
 
         public List<SampleObject> Localizacoes { get; set; }
 
-        public List<SampleObject> RequestId { get; set; }
+        public List<SampleObject> TiposDeServico { get; set; }
 
+        public List<SampleObject> ListStatus { get; set; }
     }
 
 

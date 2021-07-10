@@ -7,20 +7,49 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using DataAccess.Models;
+using TimeSheet.Models;
+using DataAccess.Repository;
+using DataAccess.Enum;
+using DataAccess.ExtraModels;
 
 namespace TimeSheet.Controllers
 {
     public class EventosController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        public ClienteRepository ClientesRepository;
+        public ColaboradorRepository ColaboradorRepository;
+        public LocalizacaoRepository LocalizacaoRepository;
+        public EventoRepository EventoRepository;
+        public TipoServicoRepository TipoServicoRepository;
 
-        public EventosController(ApplicationDbContext context)
+
+        public EventosController(ClienteRepository _ClienteRepository, ColaboradorRepository _ColaboradorRepository, LocalizacaoRepository _LocalizacaoRepository,
+            EventoRepository _EventoRepository, TipoServicoRepository _TipoServicoRepository)
         {
-            _context = context;
+            ClientesRepository = _ClienteRepository;
+            ColaboradorRepository = _ColaboradorRepository;
+            LocalizacaoRepository = _LocalizacaoRepository;
+            EventoRepository = _EventoRepository;
+            TipoServicoRepository = _TipoServicoRepository;
         }
 
-     
-    
+        public ActionResult Index()
+        {
+
+            EventoModelView eventoModelView = new EventoModelView
+            {
+                Clientes = ClientesRepository.GetAllClienteSampleObject(),
+                Colaboradores = ColaboradorRepository.GetAllColaboradoresSampleObject(),
+                Localizacoes = LocalizacaoRepository.GetAllLocalizacao(),
+                TiposDeServico = TipoServicoRepository.GetAllTipoServicoToObjectSample(),
+                ListStatus = Enum.GetValues(typeof(EnumStatus)).Cast<EnumStatus>()
+               .Select(r => new SampleObject { IdInt = (int)r, Description = r.ToString() })
+               .ToList()
+            };
+
+            return View(eventoModelView);
+        }
+
 
     }
 }

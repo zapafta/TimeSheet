@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.ExtraModels;
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,21 @@ namespace DataAccess.Repository
         public Colaborador  GetColaboradorById(Guid IdColaborador)
         {
             return context.Colaborador.FirstOrDefault(t => t.Id == IdColaborador);
+        }
+
+
+        public List<SampleObject> GetAllColaboradoresSampleObject()
+        {
+
+            var ListReturn = context.Colaborador.Select(t => new SampleObject()
+            {
+                Id = t.Id,
+                Description = t.Nome
+
+            }).ToList();
+
+            return ListReturn;
+
         }
 
 
