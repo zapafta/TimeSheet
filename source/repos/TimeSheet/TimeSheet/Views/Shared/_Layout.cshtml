@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,7 +18,10 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Olá! Espero que estejas a ter uma boa tarde de trabalho</a>
+                @if(this.User.Identity.IsAuthenticated)
+                {  <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Ola @this.User.Identity.Name.ToString();</a>
+
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -41,8 +46,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Colaboradors" asp-action="Index">Colaboradors</a>
                         </li>
+                        <li class="nav-item">
+
+                        </li>
                     </ul>
                 </div>
+                 }else{
+
+             
+            <a class="navbar-brand" asp-area="" asp-controller="Account" asp-action="facebook-login">   <img style="height:25px; width:150px" src="~/image/entrarFacebook.png" /></a>
+                }
             </div>
         </nav>
     </header>

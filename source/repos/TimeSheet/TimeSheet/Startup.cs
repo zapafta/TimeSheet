@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataAccess;
 using DataAccess.Repository;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace TimeSheet
 {
@@ -48,12 +50,26 @@ namespace TimeSheet
           .AddControllersWithViews()
           .AddRazorRuntimeCompilation();
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+            {
+                options.LoginPath = "/home";
+            }
+       ).AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "243692003979059";
+                facebookOptions.AppSecret = "53caeccb0c0567735af185b8059c417b";
+            });
+
+
             services.AddTransient<ClienteRepository>();
             services.AddTransient<ColaboradorRepository>();
             services.AddTransient<EventoRepository>();
             services.AddTransient<LocalizacaoRepository>();
             services.AddTransient<TipoServicoRepository>();
-           
+
 
         }
 
@@ -72,10 +88,11 @@ namespace TimeSheet
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDY3NDIxQDMxMzkyZTMyMmUzMG5ISWVDdS9SWWdCN1R4NXh2aGZhOGk4M1dzTk9zamRreGcrandYdFU4Wm89");
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -85,6 +102,9 @@ namespace TimeSheet
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+
         }
 
     }

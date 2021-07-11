@@ -11,9 +11,12 @@ using TimeSheet.Models;
 using DataAccess.Repository;
 using DataAccess.Enum;
 using DataAccess.ExtraModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TimeSheet.Controllers
 {
+
+    [Authorize]
     public class EventosController : Controller
     {
         public ClienteRepository ClientesRepository;
