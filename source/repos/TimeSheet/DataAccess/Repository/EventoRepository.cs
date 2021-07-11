@@ -1,4 +1,5 @@
 ﻿using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,16 @@ namespace DataAccess.Repository
         }
 
 
+
+        public void SaveEvento(Evento EventoToSave)
+        {
+            
+
+
+            context.Entry(EventoToSave).State = EventoToSave.Id == Guid.Empty ? EntityState.Added : EntityState.Modified;
+            context.SaveChanges();
+
+
+        }
     }
 }

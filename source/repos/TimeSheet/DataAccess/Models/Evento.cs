@@ -20,7 +20,7 @@ namespace DataAccess.Models
 
         [Display(Order = 1)]
         [Required(ErrorMessage = "Descrição is required")]
-        public string Descrição { get; set; }
+        public string Descricao { get; set; }
 
         [Required(ErrorMessage = "StartDate is required")]
         [Display(Order = 2)]
@@ -68,9 +68,9 @@ namespace DataAccess.Models
         public Guid IdColaborador { get; set; }
         public Colaborador Colaborador { get; set; }
 
-
-
-
+        [NotMapped]
+        public string Date { get; set; }
+  
 
 
 

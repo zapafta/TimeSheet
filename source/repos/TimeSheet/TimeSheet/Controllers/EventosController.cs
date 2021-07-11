@@ -54,5 +54,22 @@ namespace TimeSheet.Controllers
         }
 
 
+        public AnswerClientServer SaveEvent(Evento Evento)
+        {
+
+            try
+            {
+                EventoRepository.SaveEvento(Evento);
+                return AnswerClientServer.GetSuccessAnswerWithMessage("Sucesso");
+            }
+            catch (Exception ex)
+            {
+                return AnswerClientServer.GetErrorAnswer(ex.Message);
+
+            }
+
+        }
+
+
     }
 }

@@ -15,17 +15,17 @@
               "format": {
                 "abbreviated": {
                   "1": "Jan",
-                  "2": "Feb",
+                  "2": "Fev",
                   "3": "Mar",
-                  "4": "Apr",
-                  "5": "May",
+                  "4": "Abr",
+                  "5": "Mai",
                   "6": "Jun",
                   "7": "Jul",
-                  "8": "Aug",
-                  "9": "Sep",
-                  "10": "Oct",
+                  "8": "Ago",
+                  "9": "Set",
+                  "10": "Out",
                   "11": "Nov",
-                  "12": "Dec"
+                  "12": "Dez"
                 },
                 "narrow": {
                   "1": "J",
@@ -42,34 +42,34 @@
                   "12": "D"
                 },
                 "wide": {
-                  "1": "January",
-                  "2": "February",
-                  "3": "March",
-                  "4": "April",
-                  "5": "May",
-                  "6": "June",
-                  "7": "July",
-                  "8": "August",
-                  "9": "September",
-                  "10": "October",
-                  "11": "November",
-                  "12": "December"
+                  "1": "Janeiro",
+                  "2": "Fevereiro",
+                  "3": "Março",
+                  "4": "Abril",
+                  "5": "Maio",
+                  "6": "Junho",
+                  "7": "Julho",
+                  "8": "Agosto",
+                  "9": "Setembro",
+                  "10": "Outubro",
+                  "11": "Novembro",
+                  "12": "Dezembro"
                 }
               },
               "stand-alone": {
                 "abbreviated": {
                   "1": "Jan",
-                  "2": "Feb",
+                  "2": "Fev",
                   "3": "Mar",
-                  "4": "Apr",
-                  "5": "May",
+                  "4": "Abr",
+                  "5": "Mai",
                   "6": "Jun",
                   "7": "Jul",
-                  "8": "Aug",
-                  "9": "Sep",
-                  "10": "Oct",
+                  "8": "Ago",
+                  "9": "Set",
+                  "10": "Out",
                   "11": "Nov",
-                  "12": "Dec"
+                  "12": "Dez"
                 },
                 "narrow": {
                   "1": "J",
@@ -86,31 +86,31 @@
                   "12": "D"
                 },
                 "wide": {
-                  "1": "January",
-                  "2": "February",
-                  "3": "March",
-                  "4": "April",
-                  "5": "May",
-                  "6": "June",
-                  "7": "July",
-                  "8": "August",
-                  "9": "September",
-                  "10": "October",
-                  "11": "November",
-                  "12": "December"
+                  "1": "Janeiro",
+                  "2": "Fevereiro",
+                  "3": "Março",
+                  "4": "Abril",
+                  "5": "Maio",
+                  "6": "Junho",
+                  "7": "Julho",
+                  "8": "Agosto",
+                  "9": "Setembro",
+                  "10": "Outubro",
+                  "11": "Novembro",
+                  "12": "Dezembro"
                 }
               }
             },
             "days": {
               "format": {
                 "abbreviated": {
-                  "sun": "Sun",
-                  "mon": "Mon",
-                  "tue": "Tue",
-                  "wed": "Wed",
-                  "thu": "Thu",
-                  "fri": "Fri",
-                  "sat": "Sat"
+                  "sun": "Dom",
+                  "mon": "Seg",
+                  "tue": "Ter",
+                  "wed": "Qua",
+                  "thu": "Qui",
+                  "fri": "Sex",
+                  "sat": "Sab"
                 },
                 "narrow": {
                   "sun": "S",
@@ -122,33 +122,33 @@
                   "sat": "S"
                 },
                 "short": {
-                  "sun": "Su",
-                  "mon": "Mo",
-                  "tue": "Tu",
-                  "wed": "We",
-                  "thu": "Th",
-                  "fri": "Fr",
+                  "sun": "Do",
+                  "mon": "2ª",
+                  "tue": "3ª",
+                  "wed": "4ª",
+                  "thu": "5ª",
+                  "fri": "6ª",
                   "sat": "Sa"
                 },
                 "wide": {
-                  "sun": "Sunday",
-                  "mon": "Monday",
-                  "tue": "Tuesday",
-                  "wed": "Wednesday",
-                  "thu": "Thursday",
-                  "fri": "Friday",
-                  "sat": "Saturday"
+                  "sun": "Domingo",
+                  "mon": "Segunda",
+                  "tue": "Terça",
+                  "wed": "Quarta",
+                  "thu": "Quinta",
+                  "fri": "Sexta",
+                  "sat": "Sábado"
                 }
               },
               "stand-alone": {
                 "abbreviated": {
-                  "sun": "Sun",
-                  "mon": "Mon",
-                  "tue": "Tue",
-                  "wed": "Wed",
-                  "thu": "Thu",
-                  "fri": "Fri",
-                  "sat": "Sat"
+                  "sun": "Dom",
+                  "mon": "Seg",
+                  "tue": "Ter",
+                  "wed": "Qua",
+                  "thu": "Qui",
+                  "fri": "Sex",
+                  "sat": "Sab"
                 },
                 "narrow": {
                   "sun": "S",
@@ -160,22 +160,22 @@
                   "sat": "S"
                 },
                 "short": {
-                  "sun": "Su",
-                  "mon": "Mo",
-                  "tue": "Tu",
-                  "wed": "We",
-                  "thu": "Th",
-                  "fri": "Fr",
+                  "sun": "Do",
+                  "mon": "2ª",
+                  "tue": "3ª",
+                  "wed": "4ª",
+                  "thu": "5ª",
+                  "fri": "6ª",
                   "sat": "Sa"
                 },
                 "wide": {
-                  "sun": "Sunday",
-                  "mon": "Monday",
-                  "tue": "Tuesday",
-                  "wed": "Wednesday",
-                  "thu": "Thursday",
-                  "fri": "Friday",
-                  "sat": "Saturday"
+                  "sun": "Domingo",
+                  "mon": "Segunda",
+                  "tue": "Terça",
+                  "wed": "Quarta",
+                  "thu": "Quinta",
+                  "fri": "Sexta",
+                  "sat": "Sábado"
                 }
               }
             },

@@ -24,7 +24,20 @@
 @await Html.PartialAsync("DialogInternal", Model)
 
 <script>
+    var L10n = ej.base.L10n;
+    L10n.load({
+        "en-150": {
+            "schedule": {
+                "day": "Dia",
+                "week": "Semana",
+                "workWeek": "Semana de Trabalho",
+                "month": "Mês",
+                "agenda": "Agenda",
+                "today": "Hoje"
 
+            }
+        }
+    });
 
     loadCultureFiles('en-150');
     function loadCultureFiles(name) {
