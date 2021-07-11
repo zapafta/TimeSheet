@@ -4,12 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<h4>😍 <strong>Clientes</strong></h4>
+
+<p style="font-size:x-large">
+    <a style="color:antiquewhite" asp-action="Create">Criar novo cliente</a>
 </p>
-<table class="table">
+<table class="table aclass">
     <thead>
         <tr>
             <th>
@@ -37,9 +38,9 @@
                 @Html.DisplayFor(modelItem => item.NIF)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a style="color:antiquewhite" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a style="color:antiquewhite" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a style="color:antiquewhite" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
