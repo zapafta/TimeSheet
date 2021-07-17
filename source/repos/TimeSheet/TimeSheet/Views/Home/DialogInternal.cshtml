@@ -5,6 +5,8 @@
     DateTime MaxTime = new DateTime(2020, 01, 01, 20, 0, 0);
     ViewData["Title"] = "Index";
 }
+
+
 <div class="e-content">
     <ejs-dialog id="DialogInternal"
                 enableResize="true"
@@ -103,7 +105,7 @@
 
 
         document.getElementById("btdialogInternal").addEventListener('click', function () {
-       
+
 
             SaveEvent();
 
@@ -115,12 +117,13 @@
 
 
     function SaveEvent() {
- 
+
+        var toastObj;
 
         var DateEvent = document.getElementById("DialogInternDate").ej2_instances[0].value;
         var TimeStart = document.getElementById("TimeStart").ej2_instances[0].value;
         var TimeEnd = document.getElementById("TimeEnd").ej2_instances[0].value;
-   
+
         let ObjectSend = {
             Id:"",
             Descricao: "N/A",
@@ -130,7 +133,7 @@
             IdCliente: document.getElementById("ddCliente").ej2_instances[0].value,
             IdLocalizacao: document.getElementById("ddLocalizacao").ej2_instances[0].value,
             IdTipoServico: document.getElementById("ddTipoServico").ej2_instances[0].value,
-            Obs: "N/A", 
+            Obs: "N/A",
             Rating: 1,
             Status: document.getElementById("ddStatus").ej2_instances[0].value,
             IdColaborador: document.getElementById("ddColaborador").ej2_instances[0].value
@@ -144,11 +147,20 @@
             async: true,
             data: ObjectSend,
             success: function (dados) {
-                debugger
-                if (dados.Error == false) {
-                
 
-               
+                debugger
+                if (dados.error == false) {
+
+            var toast = new ej.notifications.Toast({
+                    title: '✔' + '',
+                content: dados.message,
+                cssClass: 'e-toast-success',
+                icon: 'e-success toast-icons',
+                position: { X: "Right", Y: "Top" }
+        });
+                    toast.appendTo('#divToShowToast');
+                    toast.show();
+
 
                 } else {
                     alert('Erro')

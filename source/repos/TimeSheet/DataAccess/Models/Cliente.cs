@@ -26,6 +26,17 @@ namespace DataAccess.Models
  
         public int NIF { get; set; }
 
+        [Display(Order = 4)]
+        [Required(ErrorMessage = "Email is required")]
+
+        public string Email { get; set; }
+
+
+        [Display(Order = 5)]
+        [Required(ErrorMessage = "PhoneNumber is required")]
+
+        public int PhoneNumber { get; set; }
+
 
     }
 }

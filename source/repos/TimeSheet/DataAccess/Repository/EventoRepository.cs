@@ -61,7 +61,7 @@ namespace DataAccess.Repository
                                Cliente = t.Cliente.Nome,
                                Colaborador = t.Colaborador.Nome,
                                Location = t.Localizacao.Descrição,
-                               Subject = t.TipoServico.Descrição,
+                               Subject = t.Cliente.Nome  + "-"  + t.TipoServico.Descrição,
                                Obs=t.Obs,
                                StartTime=t.StartDate,
                                EndTime=t.EndDate

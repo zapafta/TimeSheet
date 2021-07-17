@@ -59,6 +59,13 @@ namespace TimeSheet.Controllers
 
             try
             {
+                TimeSpan StartTime = Evento.StartDate.TimeOfDay;
+                TimeSpan EndTime = Evento.EndDate.TimeOfDay;
+                DateTime date = DateTime.Parse(Evento.Date);
+
+                Evento.StartDate = date.Date.Add(StartTime);
+                Evento.EndDate = date.Date.Add(EndTime);
+                
                 EventoRepository.SaveEvento(Evento);
                 return AnswerClientServer.GetSuccessAnswerWithMessage("Sucesso");
             }

@@ -6,13 +6,14 @@
 
 
 
-
+<div id="divToShowToast"></div>
 
 <div class="content-wrapper" style="max-width: 100%">
     @if (this.User.Identity.IsAuthenticated)
     {
 
         <div class="row" style="margin:15px">
+           
             <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
                 @{var s = this.User.Identity.Name.ToString();
                     var firstSpaceIndex = s.IndexOf(" ");

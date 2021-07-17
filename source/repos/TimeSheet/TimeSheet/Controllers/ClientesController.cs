@@ -90,7 +90,7 @@ namespace TimeSheet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Nome,BirthDate,NIF")] Cliente cliente)
+        public async Task<IActionResult> Edit(Guid id, Cliente cliente)
         {
             if (id != cliente.Id)
             {
