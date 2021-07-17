@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DataAccess.Enum;
+using DataAccess.ExtraModels;
+using DataAccess.Models;
+using DataAccess.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,27 +19,57 @@ namespace TimeSheet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public ClienteRepository ClientesRepository;
+        public ColaboradorRepository ColaboradorRepository;
+        public LocalizacaoRepository LocalizacaoRepository;
+        public EventoRepository EventoRepository;
+        public TipoServicoRepository TipoServicoRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ClienteRepository _ClienteRepository, ColaboradorRepository _ColaboradorRepository, LocalizacaoRepository _LocalizacaoRepository,
+         EventoRepository _EventoRepository, TipoServicoRepository _TipoServicoRepository)
         {
-            _logger = logger;
+            ClientesRepository = _ClienteRepository;
+            ColaboradorRepository = _ColaboradorRepository;
+            LocalizacaoRepository = _LocalizacaoRepository;
+            EventoRepository = _EventoRepository;
+            TipoServicoRepository = _TipoServicoRepository;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
- 
-            return View();
+
+            EventoModelView eventoModelView = new EventoModelView
+            {
+                ListEvents = EventoRepository.GetAllEventsByUserLogad(Guid.Empty),
+                Clientes = ClientesRepository.GetAllClienteSampleObject(),
+                Colaboradores = ColaboradorRepository.GetAllColaboradoresSampleObject(),
+                Localizacoes = LocalizacaoRepository.GetAllLocalizacao(),
+                TiposDeServico = TipoServicoRepository.GetAllTipoServicoToObjectSample(),
+                ListStatus = Enum.GetValues(typeof(EnumStatus)).Cast<EnumStatus>()
+               .Select(r => new SampleObject { IdInt = (int)r, Description = r.ToString() })
+               .ToList()
+            };
+
+            return View(eventoModelView);
         }
 
-        public IActionResult Privacy()
+
+        public AnswerClientServer SaveEvent(Evento Evento)
         {
-            return View();
+
+            try
+            {
+                EventoRepository.SaveEvento(Evento);
+                return AnswerClientServer.GetSuccessAnswerWithMessage("Sucesso");
+            }
+            catch (Exception ex)
+            {
+                return AnswerClientServer.GetErrorAnswer(ex.Message);
+
+            }
+
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
     }
 }

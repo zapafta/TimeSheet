@@ -36,40 +36,6 @@ namespace TimeSheet.Controllers
             TipoServicoRepository = _TipoServicoRepository;
         }
 
-        public ActionResult Index()
-        {
-
-            EventoModelView eventoModelView = new EventoModelView
-            {
-                Clientes = ClientesRepository.GetAllClienteSampleObject(),
-                Colaboradores = ColaboradorRepository.GetAllColaboradoresSampleObject(),
-                Localizacoes = LocalizacaoRepository.GetAllLocalizacao(),
-                TiposDeServico = TipoServicoRepository.GetAllTipoServicoToObjectSample(),
-                ListStatus = Enum.GetValues(typeof(EnumStatus)).Cast<EnumStatus>()
-               .Select(r => new SampleObject { IdInt = (int)r, Description = r.ToString() })
-               .ToList()
-            };
-
-            return View(eventoModelView);
-        }
-
-
-        public AnswerClientServer SaveEvent(Evento Evento)
-        {
-
-            try
-            {
-                EventoRepository.SaveEvento(Evento);
-                return AnswerClientServer.GetSuccessAnswerWithMessage("Sucesso");
-            }
-            catch (Exception ex)
-            {
-                return AnswerClientServer.GetErrorAnswer(ex.Message);
-
-            }
-
-        }
-
-
+    
     }
 }

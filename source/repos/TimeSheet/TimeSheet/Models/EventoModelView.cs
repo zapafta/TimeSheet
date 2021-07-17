@@ -19,6 +19,8 @@ namespace TimeSheet.Models
         public List<SampleObject> TiposDeServico { get; set; }
 
         public List<SampleObject> ListStatus { get; set; }
+
+        public List<EventsScheduler> ListEvents { get; set; }
     }
 
 

@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.ExtraModels;
+using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,28 @@ namespace DataAccess.Repository
             context.SaveChanges();
 
 
+        }
+
+        public List<EventsScheduler> GetAllEventsByUserLogad(Guid guid)
+        {
+
+
+           return context.Evento.Include(t => t.Colaborador)
+                           .Include(t => t.Cliente)
+                           .Include(t => t.Localizacao)
+                           .Include(t => t.TipoServico).Select(t => new EventsScheduler()
+                           {
+
+                               Cliente = t.Cliente.Nome,
+                               Colaborador = t.Colaborador.Nome,
+                               Location = t.Localizacao.Descrição,
+                               Subject = t.TipoServico.Descrição,
+                               Obs=t.Obs,
+                               StartTime=t.StartDate,
+                               EndTime=t.EndDate
+
+                           }).ToList();
+          
         }
     }
 }

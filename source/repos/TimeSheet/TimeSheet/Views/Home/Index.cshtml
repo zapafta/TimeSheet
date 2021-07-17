@@ -1,83 +1,151 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    @model EventoModelView
+
 }
 
 
-     
-
-                <div class="col-lg-12 control-section">
-                    <div class="content-wrapper" style="max-width: 100%">
-                        @if(this.User.Identity.IsAuthenticated)
-                        {
-
-                        <div class="row">
-                            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border">
-                                <p>Proximo bloco disponivel</p>
-                                <p> <h3>Amanhã está disponivel as 14 : 00  </h3> 2021-03-08 15:00  </p>
-
-                                <button>Criar Registo</button>
-
-                            </div>
-                            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
-                                <p>Serviços realizados</p>
-                                <p> <h3> esta semana <strong style="color:green">25 </strong></h3>🔼</p>
-                                <p>Semana passada <strong>12</strong></p>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border" style=" margin-top:10px">
-
-                                <div class="control-section">
-
-                                    <ejs-grid id="Grid" allowPaging="true">
-                                        <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
-                                        <e-grid-columns>
-                                            <e-grid-column headerText="Cliente"></e-grid-column>
-                                            <e-grid-column headerText="Tipo Serviço"></e-grid-column>
-                                            <e-grid-column headerText="Data Hora"></e-grid-column>
-                                            <e-grid-column headerText="Faltam"></e-grid-column>
 
 
 
-                                        </e-grid-columns>
-                                    </ejs-grid>
+<div class="content-wrapper" style="max-width: 100%">
+    @if (this.User.Identity.IsAuthenticated)
+    {
 
-                                </div>
+        <div class="row" style="margin:15px">
+            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                @{var s = this.User.Identity.Name.ToString();
+                    var firstSpaceIndex = s.IndexOf(" ");
+                    var firstString = s.Substring(0, firstSpaceIndex);
+                }
+                <h4> Olá <strong> @firstString </strong></h4>
+
+                <h3 style="font-style: italic; ">  Sabias que os corcodilos só dormem com os olhos abertos? </h3>
+                <h4>  Aproveita e já que sabes esta, agenda aí uma data para vires ter connnosco 😍</h4>
+                <ejs-schedule id="schedule" width="100%" height="700px"
+                              locale="en-150"
+                              startHour="8:00"
+                              cellClick="cellClickscheduler"
+                              showTimeIndicator="true"
+                              enableAllDayScroll="true"
+                              endHour="20:00"
+                              popupOpen="onPopupOpen"
+                              selectedDate="DateTime.Now">
+                    <e-schedule-eventsettings dataSource="@Model.ListEvents" id="Id">
+
+                        <e-eventsettings-fields>
+
+                            <e-field-subject title="Tipo" name="Subject"></e-field-subject>
+                            <e-field-location title="Localização" name="Location"></e-field-location>
+                            <e-field-description title="Descrição" name="Description"></e-field-description>
+                            <e-field-starttime title="Hora Inicial" name="StartTime"></e-field-starttime>
+                            <e-field-endtime title="HorFinal" name="EndTime"></e-field-endtime>
+                            <e-field-description title="Obs" name="Obs"></e-field-description>
+                        </e-eventsettings-fields>
 
 
-                            </div>
-                            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border">
-                            </div>
-                            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border">
-                            </div>
-                            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-9 col-sm-9 col-lg-9 col-md-9 border">
-                            </div>
-                            <div class="col-xs-3 col-sm-3 col-lg-3 col-md-3 border">
-                            </div>
-                        </div>
+                    </e-schedule-eventsettings>
 
-                        }else{
-                        <p>Regista-te :)</p>
-                        
-                        <img style=" height:100%; width:100%" src="~/image/Maquilhar.jpg" />
+                </ejs-schedule>
 
-                        }
-                    </div>
 
-                </div>
+            </div>
+        </div>
+        @await Html.PartialAsync("DialogInternal", Model)
+
+        <script>
+            var L10n = ej.base.L10n;
+            L10n.load({
+                "en-150": {
+                    "schedule": {
+                        "day": "Dia",
+                        "week": "Semana",
+                        "workWeek": "Semana de Trabalho",
+                        "month": "Mês",
+                        "agenda": "Agenda",
+                        "today": "Hoje"
+
+                    }
+                }
+            });
+
+            loadCultureFiles('en-150');
+            function loadCultureFiles(name) {
+                var files = ['ca-gregorian.json', 'numberingSystems.json', 'numbers.json', 'timeZoneNames.json', 'ca-islamic.json'];
+                var loader = ej.base.loadCldr;
+                var loadCulture = function (prop) {
+                    var val, ajax;
+                    if (files[prop] === 'numberingSystems.json') {
+                        ajax = new ej.base.Ajax(location.origin + '/../scripts/cldr-data/supplemental/' + files[prop], 'GET', false);
+                    } else {
+                        ajax = new ej.base.Ajax(location.origin + '/../scripts/cldr-data/main/' + name + '/' + files[prop], 'GET', false);
+                    }
+                    ajax.onSuccess = function (value) {
+                        val = value;
+                    };
+                    ajax.send();
+                    loader(JSON.parse(val));
+                };
+                for (var prop = 0; prop < files.length; prop++) {
+                    loadCulture(prop);
+                }
+            }
+
+
+            function onPopupOpen(args) {
+
+
+
+
+                if (args.type === 'Editor') {
+
+                    var DialogInternal = document.getElementById('DialogInternal').ej2_instances[0];
+                    DialogInternal.header = '📆 Adicionar Evento';
+                    DialogInternal.show();
+
+
+
+
+                    args.cancel = true;
+                }
+            }
+
+            function cellClickscheduler(args) {
+
+
+                var StartTime = args.startTime.toLocaleTimeString(navigator.language, {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                var EndTime = args.endTime.toLocaleTimeString(navigator.language, {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                document.getElementById('TimeEnd').ej2_instances[0].value = EndTime;
+                document.getElementById('TimeStart').ej2_instances[0].value = StartTime;
+
+                var DialogInternal = document.getElementById('DialogInternal').ej2_instances[0];
+                DialogInternal.show();
+                args.cancel = true;
+            }
+
+
+
+        </script>
+
+
+    }
+    else
+    {
+        <p>Regista-te :)</p>
+
+        <img style=" height:100%; width:100%" src="~/image/Maquilhar.jpg" />
+
+    }
+</div>
+
 
 
 <script type="text/javascript">
