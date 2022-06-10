@@ -57,7 +57,7 @@ namespace TimeSheet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,BirthDate,NIF")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,Nome,BirthDate,NIF,Email")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {

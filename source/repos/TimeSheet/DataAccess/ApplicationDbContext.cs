@@ -36,10 +36,7 @@ namespace DataAccess
        .HasKey(c => new { c.IdColaborador, c.IdTipoServico });
 
             modelBuilder.Entity<ColaboradorXTipoServico>()
-                .HasOne(bc => bc.Colaborador)
-                .WithMany(b => b.ColaboradorXTipoServico)
-                .HasForeignKey(bc => bc.IdColaborador)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(bc => bc.Colaborador);
 
 
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()

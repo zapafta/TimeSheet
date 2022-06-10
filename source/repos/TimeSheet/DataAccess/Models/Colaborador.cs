@@ -24,12 +24,7 @@ namespace DataAccess.Models
         [Required(ErrorMessage = "BirthDate is required")]
         public DateTime BirthDate { get; set; }
 
-        [Display(Order = 3)]
-        [Required(ErrorMessage = "NIF is required")]
-
-
-        public virtual ICollection<ColaboradorXTipoServico> ColaboradorXTipoServico { get; set; }
-    
+     
 
 
 
