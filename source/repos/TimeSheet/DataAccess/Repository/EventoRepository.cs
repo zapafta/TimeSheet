@@ -61,10 +61,13 @@ namespace DataAccess.Repository
                                Cliente = t.Cliente.Nome,
                                Colaborador = t.Colaborador.Nome,
                                Location = t.Localizacao.Descrição,
-                               Subject = t.Cliente.Nome  + "-"  + t.TipoServico.Descrição,
+                               Subject = t.Colaborador.Nome  + "-"  + t.TipoServico.Descrição,
                                Obs=t.Obs,
                                StartTime=t.StartDate,
-                               EndTime=t.EndDate
+                               EndTime=t.EndDate,
+                               IsAllDay=true,
+                               isBlock=true
+
 
                            }).ToList();
           

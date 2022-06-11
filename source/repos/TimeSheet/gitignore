@@ -1,0 +1,16 @@
+﻿*.cache
+*.json
+*.suo
+*.pdf
+.vs
+HubSage/bin/
+HubSage/obj/
+obj
+packages
+bin
+TestesUnitarios/obj/
+*.user
+Debug/
+debug/
+.vs/
+

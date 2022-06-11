@@ -16,6 +16,8 @@ namespace DataAccess.ExtraModels
         public string Obs { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public bool IsAllDay { get; set; }
+        public bool isBlock { get; set; }
      
 
     }
