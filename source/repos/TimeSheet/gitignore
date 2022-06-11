@@ -2,6 +2,8 @@
 *.json
 *.suo
 *.pdf
+*.dll
+*.target
 .vs
 HubSage/bin/
 HubSage/obj/
