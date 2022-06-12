@@ -38,25 +38,26 @@ namespace TimeSheet.Controllers
 
         public ActionResult Index()
         {
-            var FullName = this.User.Identity.Name.ToString().Split(' ');
-            string FirstName = FullName[0];
-            
-            DashboardViewModel dashboard = new DashboardViewModel
+
+            DashboardViewModel dashboard = new DashboardViewModel();
+
+
+            if(this.User.Identity.Name !=null)
             {
+                var FullName = this.User.Identity.Name.ToString().Split(' ');
+                string FirstName = FullName[0];
+            }
 
+            dashboard.MessageOfDay = ColaboradorRepository.GetFraseOfDay();
+            dashboard.DaysToEndOfYear = 500;
+            dashboard.NextAbsence = DateTime.Now.Date;
 
-
-              MessageOfDay =ColaboradorRepository.GetFraseOfDay(),
-              DaysToEndOfYear=500,
-              NextAbsence=DateTime.Now.Date,
-
-            };
 
             return View(dashboard);
         }
 
 
-   
+
 
 
     }
