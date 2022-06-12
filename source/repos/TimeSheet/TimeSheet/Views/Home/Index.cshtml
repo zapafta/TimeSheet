@@ -1,291 +1,69 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-    @model EventoModelView
+﻿@using TimeSheet.Models.Dashboard
+@{
+    @model DashboardViewModel
 
-    var WorkDays = new int[] { 1,2,3,4,5 };
 
 }
 
-<style>
-.e-schedule .e-timeline-year-view .e-work-cells:not(.e-work-days) 
-{
-
-background-color: #80808085 !important;
-
-}
-
-</style>
-
-<div id="divToShowToast"></div>
-
-<div class="content-wrapper" style="max-width: 100%">
-    @if (this.User.Identity.IsAuthenticated)
-    {
-
-        <div class="row" style="margin:15px">
-           
-            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
-                @{var s = this.User.Identity.Name.ToString();
-                    var firstSpaceIndex = s.IndexOf(" ");
-                    var firstString = s.Substring(0, firstSpaceIndex);
-                }
-                <h4> Olá <strong> @firstString </strong></h4>
-
-                <h3 style="font-style: italic; ">  Sabias que os corcodilos só dormem com os olhos abertos? </h3>
-                <h4>  Aproveita e já que sabes esta, agenda aí uma data para vires ter connnosco 😍</h4>
-                <ejs-schedule id="schedule" width="Auto"  height="800" 
-                              locale="en-150"
-                              startHour="8:00"
-                              showWeekNumber="true"
-                              cellClick="cellClickscheduler"
-                              showTimeIndicator="true"
-                              enableAllDayScroll="true"
-                              IsResponsive="true"
-                              endHour="20:00"
-                              workDays="WorkDays"
-                              selectedDate="DateTime.Now">
-
-                     <e-schedule-views>
-                    <e-schedule-view option="TimelineYear" displayName="Vista Ano"></e-schedule-view>
-                    <e-schedule-view option="Month" displayName="Vista Mes" ></e-schedule-view>
-                    <e-schedule-view option="Week" displayName="Vista Mes" ></e-schedule-view>
-                </e-schedule-views>
-
-                    <e-schedule-eventsettings dataSource="@Model.ListEvents" id="Id">
-                          
-                        <e-eventsettings-fields>
-
-                            <e-field-subject title="Tipo" name="Subject"></e-field-subject>
-                            <e-field-location title="Localização" name="Location"></e-field-location>
-                            <e-field-description title="Descrição" name="Description"></e-field-description>
-                            <e-field-starttime title="Hora Inicial" name="StartTime"></e-field-starttime>
-                            <e-field-endtime title="HorFinal" name="EndTime"></e-field-endtime>
-                            <e-field-description title="Obs" name="Obs"></e-field-description>
-                            <e-field-isallDay title="IsAllDay" name="IsAllDay"></e-field-isallDay>
-                        </e-eventsettings-fields>
-                       
-
-                    </e-schedule-eventsettings>
-
-                </ejs-schedule>
-
-
-            </div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         </div>
-        @await Html.PartialAsync("DialogInternal", Model)
+              <div class="row">
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-6 col-md-6 mb-6">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Proxima Baixa/Ausência</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.NextAbsence.ToString("yyyy-MM-dd")</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-        <script>
-            var L10n = ej.base.L10n;
-            L10n.load({
-                "en-150": {
-             "schedule": {
-            "day": "Dia",
-            "week": "Semana",
-            "workWeek": "Semana de trabalho",
-            "month": "Mês",
-            "year": "Ano",
-            "agenda": "Agenda",
-            "weekAgenda": "Agenda da semana",
-            "workWeekAgenda": "Agenda da Semana de Trabalho",
-            "monthAgenda": "Agenda do mês",
-            "today": "Hoje",
-            "noEvents": "Sem eventos",
-            "emptyContainer": "Não há eventos agendados para este dia.",
-            "allDay": "Dia todo",
-            "start": "Começar",
-            "end": "Fim",
-            "more": "Mais",
-            "close": "Fechar",
-            "cancel": "Cancelar",
-            "noTitle": "(Sem título)",
-            "delete": "Excluir",
-            "deleteEvent": "Este evento",
-            "deleteMultipleEvent": "Excluir vários eventos",
-            "selectedItems": "Itens selecionados",
-            "deleteSeries": "Série inteira",
-            "edit": "Editar",
-            "editSeries": "Série inteira",
-            "editEvent": "Este evento",
-            "createEvent": "Criar",
-            "subject": "Sujeito",
-            "addTitle": "Adicionar título",
-            "moreDetails": "Mais detalhes",
-            "save": "Guardar",
-            "editContent": "Como você gostaria de alterar o compromisso na série?",
-            "deleteContent": "Tem certeza de que deseja excluir este evento?",
-            "deleteMultipleContent": "Tem certeza de que deseja excluir os eventos selecionados?",
-            "newEvent": "Novo evento",
-            "title": "Título",
-            "location": "Localização",
-            "description": "Descrição",
-            "timezone": "Fuso horário",
-            "startTimezone": "Iniciar fuso horário",
-            "endTimezone": "Fuso horário final",
-            "repeat": "Repetir",
-            "saveButton": "Guardar",
-            "cancelButton": "Cancelar",
-            "deleteButton": "Excluir",
-            "recurrence": "Recorrência",
-            "wrongPattern": "O padrão de recorrência não é válido.",
-            "seriesChangeAlert": "Deseja cancelar as alterações feitas em instâncias específicas desta série e associá-las à série inteira novamente?",
-            "createError": "A duração do evento deve ser menor que a frequência com que ele ocorre. Diminua a duração ou altere o padrão de recorrência no editor de eventos de recorrência.",
-            "sameDayAlert": "Duas ocorrências do mesmo evento não podem ocorrer no mesmo dia.",
-            "occurenceAlert": "Não é possível reagendar uma ocorrência do compromisso recorrente se ele ignorar uma ocorrência posterior do mesmo compromisso.",
-            "editRecurrence": "Editar recorrência",
-            "repeats": "Repete",
-            "alert": "Alerta",
-            "startEndError": "A data final selecionada ocorre antes da data de início.",
-            "invalidDateError": "O valor da data inserida é inválido.",
-            "blockAlert": "Os eventos não podem ser agendados dentro do intervalo de tempo bloqueado.",
-            "ok": "Está bem",
-            "yes": "sim",
-            "no": "Não",
-            "occurrence": "Ocorrência",
-            "series": "Series",
-            "previous": "Anterior",
-            "next": "Próximo",
-            "timelineDay": "Dia da linha do tempo",
-            "timelineWeek": "Semana da Linha do Tempo",
-            "timelineWorkWeek": "Semana de trabalho da linha do tempo",
-            "timelineMonth": "Mês da linha do tempo",
-            "timelineYear": "Ano da Linha do Tempo",
-            "editFollowingEvent": "Eventos seguintes",
-            "deleteTitle": "Excluir evento",
-            "editTitle": "Editar evento",
-            "beginFrom": "Começar de",
-            "endAt": "Termina em",
-            "expandAllDaySection": "Seção de expansão para o dia todo",
-            "collapseAllDaySection": "Recolher a seção do dia inteiro",
-            "searchTimezone": "Pesquisar fuso horário",
-            "noRecords": "Nenhum registro foi encontrado"
-        },
-        "recurrenceeditor": {
-            "none": "Nenhum",
-            "daily": "Diariamente",
-            "weekly": "Semanal",
-            "monthly": "Por mês",
-            "month": "Mês",
-            "yearly": "Anual",
-            "never": "Nunca",
-            "until": "Até",
-            "count": "Contagem",
-            "first": "Primeiro",
-            "second": "Segundo",
-            "third": "Terceiro",
-            "fourth": "Quarto",
-            "last": "Último",
-            "repeat": "Repetir",
-            "repeatEvery": "Repita cada",
-            "on": "Repetir em",
-            "end": "Fim",
-            "onDay": "Dia",
-            "days": "Dias)",
-            "weeks": "Semana (s)",
-            "months": "Mês (es)",
-            "years": "Anos)",
-            "every": "cada",
-            "summaryTimes": "tempo (s)",
-            "summaryOn": "em",
-            "summaryUntil": "até",
-            "summaryRepeat": "Repete",
-            "summaryDay": "dias)",
-            "summaryWeek": "semana (s)",
-            "summaryMonth": "mês (es)",
-            "summaryYear": "anos)",
-            "monthWeek": "Mês Semana",
-            "monthPosition": "Posição do mês",
-            "monthExpander": "Expansor do mês",
-            "yearExpander": "Expansor do ano",
-            "repeatInterval": "Intervalo de repetição"
-        },
-                }
-            });
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-6 col-md-6 mb-6">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                               Faltam </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> @Model.DaysToEndOfYear para o final do ano 🥳  </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            loadCultureFiles('en-150');
-            function loadCultureFiles(name) {
-                var files = ['ca-gregorian.json', 'numberingSystems.json', 'numbers.json', 'timeZoneNames.json', 'ca-islamic.json'];
-                var loader = ej.base.loadCldr;
-                var loadCulture = function (prop) {
-                    var val, ajax;
-                    if (files[prop] === 'numberingSystems.json') {
-                        ajax = new ej.base.Ajax(location.origin + '/../scripts/cldr-data/supplemental/' + files[prop], 'GET', false);
-                    } else {
-                        ajax = new ej.base.Ajax(location.origin + '/../scripts/cldr-data/main/' + name + '/' + files[prop], 'GET', false);
-                    }
-                    ajax.onSuccess = function (value) {
-                        val = value;
-                    };
-                    ajax.send();
-                    loader(JSON.parse(val));
-                };
-                for (var prop = 0; prop < files.length; prop++) {
-                    loadCulture(prop);
-                }
-            }
+                        <!-- Earnings (Monthly) Card Example -->
+                
+
+                        <!-- Pending Requests Card Example -->
+                      
+                    </div>
+                    <div class="row">
+
+                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                      <h1 class="h1 mb-0 text-gray-1500">💡 Sabias que..</h1>
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                        <h2 class="h2 mb-0 text-gray-1500">@Model.MessageOfDay</h2>
+                 </div>
 
 
-            function onPopupOpen(args) {
-
-
-
-
-                if (args.type === 'Editor') {
-
-                    var DialogInternal = document.getElementById('DialogInternal').ej2_instances[0];
-                    DialogInternal.show();
-
-                    args.cancel = true;
-                }
-            }
-
-            function cellClickscheduler(args) {
-
-
-                var StartTime = args.startTime.toLocaleTimeString(navigator.language, {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-
-                var EndTime = args.endTime.toLocaleTimeString(navigator.language, {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-
-            @*    document.getElementById('TimeEnd').ej2_instances[0].value = EndTime;
-                document.getElementById('TimeStart').ej2_instances[0].value = StartTime;
-*@
-                var DialogInternal = document.getElementById('DialogInternal').ej2_instances[0];
-                DialogInternal.show();
-                args.cancel = true;
-            }
-
-
-
-        </script>
-
-
-    }
-  
-</div>
-
-
-
-<script type="text/javascript">
-
-
-    var x = document.getElementById("demo");
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
-
-    function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-    }
-
-</script>
+                    </div>

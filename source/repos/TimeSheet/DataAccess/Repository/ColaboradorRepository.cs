@@ -21,6 +21,20 @@ namespace DataAccess.Repository
             return context.Colaborador.ToList();
         }
 
+        public string GetFraseOfDay()
+        {
+            Random rnd = new Random();
+
+            var intMin = context.QuotesDay.Min(e => e.Id);
+            var intMax = context.QuotesDay.Max(e => e.Id);
+            var Number= rnd.Next(intMin, intMax+1);
+            string FraseDoDia = context.QuotesDay.FirstOrDefault(e => e.Id == Number).Frase;
+
+            return FraseDoDia;
+        }
+
+
+
         public Colaborador  GetColaboradorById(Guid IdColaborador)
         {
             return context.Colaborador.FirstOrDefault(t => t.Id == IdColaborador);

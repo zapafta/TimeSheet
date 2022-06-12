@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TimeSheet.Models;
+using TimeSheet.Models.Dashboard;
 
 namespace TimeSheet.Controllers
 {
@@ -37,47 +38,25 @@ namespace TimeSheet.Controllers
 
         public ActionResult Index()
         {
-
-            EventoModelView eventoModelView = new EventoModelView
+            var FullName = this.User.Identity.Name.ToString().Split(' ');
+            string FirstName = FullName[0];
+            
+            DashboardViewModel dashboard = new DashboardViewModel
             {
-                ListEvents = EventoRepository.GetAllEventsByUserLogad(Guid.Empty),
-                Clientes = ClientesRepository.GetAllClienteSampleObject(),
-                Colaboradores = ColaboradorRepository.GetAllColaboradoresSampleObject(),
-                Localizacoes = LocalizacaoRepository.GetAllLocalizacao(),
-                TiposDeServico = TipoServicoRepository.GetAllTipoServicoToObjectSample(),
-                ListStatus = Enum.GetValues(typeof(EnumStatus)).Cast<EnumStatus>()
-               .Select(r => new SampleObject { IdInt = (int)r, Description = r.ToString() })
-               .ToList()
+
+
+
+              MessageOfDay =ColaboradorRepository.GetFraseOfDay(),
+              DaysToEndOfYear=500,
+              NextAbsence=DateTime.Now.Date,
+
             };
 
-            return View(eventoModelView);
+            return View(dashboard);
         }
 
 
-        public AnswerClientServer SaveEvent(Evento Evento)
-        {
-
-            try
-            {
-                TimeSpan StartTime = Evento.StartDate.TimeOfDay;
-                TimeSpan EndTime = Evento.EndDate.TimeOfDay;
-                DateTime date = DateTime.Parse(Evento.Date);
-
-                Evento.StartDate = date.Date.Add(StartTime);
-                Evento.EndDate = date.Date.Add(EndTime);
-                Evento.IdCliente = Guid.Parse("21b713a5-ff72-4785-9421-96ac488c7c66");
-                Evento.IdLocalizacao = Guid.Parse("e817b372-63a6-48ac-a856-cc0d3fef368d");
-                Evento.IdTipoServico = Guid.Parse("4c1c5496-39b3-47af-919a-34a48b4d97f0");
-                EventoRepository.SaveEvento(Evento);
-                return AnswerClientServer.GetSuccessAnswerWithMessage("Sucesso");
-            }
-            catch (Exception ex)
-            {
-                return AnswerClientServer.GetErrorAnswer(ex.Message);
-
-            }
-
-        }
+   
 
 
     }

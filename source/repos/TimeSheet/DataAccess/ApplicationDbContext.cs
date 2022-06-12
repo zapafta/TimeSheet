@@ -27,6 +27,7 @@ namespace DataAccess
         public virtual DbSet<Evento> Evento { get; set; }
 
         public virtual DbSet<ColaboradorXTipoServico> ColaboradorXTipoServico { get; set; }
+        public virtual DbSet<QuotesDay> QuotesDay { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
