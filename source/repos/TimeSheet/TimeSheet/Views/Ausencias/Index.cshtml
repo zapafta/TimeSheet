@@ -31,8 +31,7 @@ background-color: #80808085 !important;
                 }
                 <h4> Olá <strong> @firstString </strong></h4>
 
-                <h3 style="font-style: italic; ">  Sabias que os corcodilos só dormem com os olhos abertos? </h3>
-                <h4>  Aproveita e já que sabes esta, agenda aí uma data para vires ter connnosco 😍</h4>
+      
                 <ejs-schedule id="schedule" width="Auto"  height="800" 
                               locale="en-150"
                               startHour="8:00"
@@ -45,6 +44,9 @@ background-color: #80808085 !important;
                               workDays="WorkDays"
                               selectedDate="DateTime.Now">
 
+                               <e-schedule-group resources="@ViewBag.Colaboradores"></e-schedule-group>
+
+                   
                      <e-schedule-views>
                     <e-schedule-view option="TimelineYear" displayName="Vista Ano"></e-schedule-view>
                     <e-schedule-view option="Month" displayName="Vista Mes" ></e-schedule-view>
@@ -62,6 +64,7 @@ background-color: #80808085 !important;
                             <e-field-endtime title="HorFinal" name="EndTime"></e-field-endtime>
                             <e-field-description title="Obs" name="Obs"></e-field-description>
                             <e-field-isallDay title="IsAllDay" name="IsAllDay"></e-field-isallDay>
+                             
                         </e-eventsettings-fields>
                        
 
@@ -229,18 +232,19 @@ background-color: #80808085 !important;
 
 
 
-                if (args.type === 'Editor') {
+            @*    if (args.type === 'Editor') {
 
                     var DialogInternal = document.getElementById('DialogInternal').ej2_instances[0];
                     DialogInternal.show();
 
                     args.cancel = true;
-                }
+                }*@
             }
 
             function cellClickscheduler(args) {
 
 
+@*
                 var StartTime = args.startTime.toLocaleTimeString(navigator.language, {
                     hour: '2-digit',
                     minute: '2-digit'
@@ -251,12 +255,13 @@ background-color: #80808085 !important;
                     minute: '2-digit'
                 });
 
-            @*    document.getElementById('TimeEnd').ej2_instances[0].value = EndTime;
+               document.getElementById('TimeEnd').ej2_instances[0].value = EndTime;
                 document.getElementById('TimeStart').ej2_instances[0].value = StartTime;
-*@
+
                 var DialogInternal = document.getElementById('DialogInternal').ej2_instances[0];
                 DialogInternal.show();
                 args.cancel = true;
+                *@
             }
 
 

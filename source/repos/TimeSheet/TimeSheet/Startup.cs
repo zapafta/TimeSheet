@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using DataAccess;
 using DataAccess.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace TimeSheet
 {
@@ -28,11 +30,24 @@ namespace TimeSheet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
 
             // Replace with your connection string.
             var connectionString = "server = localhost; port = 3306; database = timesheet; uid = root; password = root";
 
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddMvc();
+
+            var builder = services.AddRazorPages();
+
+
+#if DEBUG
+            builder.AddRazorRuntimeCompilation();
+#endif
+            services.AddMvcCore();
+
+            //services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            builder.AddRazorRuntimeCompilation();
             // Replace with your server version and type.
             // Use 'MariaDbServerVersion' for MariaDB.
             // Alternatively, use 'ServerVersion.AutoDetect(connectionString)'.
@@ -46,10 +61,7 @@ namespace TimeSheet
                     .EnableSensitiveDataLogging() // <-- These two calls are optional but help
                     .EnableDetailedErrors()       // <-- with debugging (remove for production).
             );
-            services
-          .AddControllersWithViews()
-          .AddRazorRuntimeCompilation();
-
+   
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -64,6 +76,13 @@ namespace TimeSheet
             });
 
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddTransient<ClienteRepository>();
             services.AddTransient<ColaboradorRepository>();
             services.AddTransient<EventoRepository>();
@@ -76,9 +95,16 @@ namespace TimeSheet
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+
+
+
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
@@ -86,6 +112,16 @@ namespace TimeSheet
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
@@ -103,7 +139,7 @@ namespace TimeSheet
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-
+            app.UseEndpoints(endpooints => endpooints.MapRazorPages()); 
 
         }
 

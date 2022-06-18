@@ -1,4 +1,5 @@
 using DataAccess;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,16 @@ namespace TimeSheet
         {
           
             var host = CreateHostBuilder(args).Build();
+
+
+            var builder = WebApplication.CreateBuilder(args);
+
+
+            var mvcBuilder = builder.Services.AddRazorPages();
+
+           
+
+            mvcBuilder.AddRazorRuntimeCompilation();
 
             using (var scope = host.Services.CreateScope())
             {
