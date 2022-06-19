@@ -58,8 +58,6 @@ namespace DataAccess.Repository
                            .Include(t => t.TipoServico).Select(t => new EventsScheduler()
                            {
 
-                               Cliente = t.Cliente.Nome,
-                               Colaborador = t.Colaborador.Nome,
                                Location = t.Localizacao.Descrição,
                                Subject = t.Colaborador.Nome  + "-"  + t.TipoServico.Descrição,
                                Obs=t.Obs,

@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Syncfusion.EJ2
+@{
     ViewData["Title"] = "Home Page";
     @model EventoModelView
 
@@ -12,6 +13,15 @@
 
 background-color: #80808085 !important;
 
+}
+
+@{
+    var dataManager = new DataManager() {
+        Url = "Ausencias/Url",
+        Adaptor = "UrlAdaptor",
+        CrudUrl = "Ausencias/UpdateData",
+        CrossDomain = true
+    };
 }
 
 </style>
@@ -44,19 +54,17 @@ background-color: #80808085 !important;
                               workDays="WorkDays"
                               selectedDate="DateTime.Now">
 
-                               <e-schedule-group resources="@ViewBag.Colaboradores"></e-schedule-group>
-
-                   
+                              
+            <e-schedule-eventsettings dataSource="dataManager">
+            </e-schedule-eventsettings>
                      <e-schedule-views>
-                    <e-schedule-view option="TimelineYear" displayName="Vista Ano"></e-schedule-view>
-                    <e-schedule-view option="Month" displayName="Vista Mes" ></e-schedule-view>
-                    <e-schedule-view option="Week" displayName="Vista Mes" ></e-schedule-view>
+                    <e-schedule-view option="TimelineYear" displayName="Ano"></e-schedule-view>
+                    <e-schedule-view option="Month" displayName="Mes" ></e-schedule-view>
+                    <e-schedule-view option="Week" displayName="Semana" ></e-schedule-view>
                 </e-schedule-views>
 
-                    <e-schedule-eventsettings dataSource="@Model.ListEvents" id="Id">
-                          
+                    <e-schedule-eventsettings dataSource="dataManager" id="Id">
                         <e-eventsettings-fields>
-
                             <e-field-subject title="Tipo" name="Subject"></e-field-subject>
                             <e-field-location title="Localização" name="Location"></e-field-location>
                             <e-field-description title="Descrição" name="Description"></e-field-description>
