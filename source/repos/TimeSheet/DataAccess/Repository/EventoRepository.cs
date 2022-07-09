@@ -53,18 +53,17 @@ namespace DataAccess.Repository
 
 
            return context.Evento.Include(t => t.Colaborador)
-                           .Include(t => t.Cliente)
                            .Include(t => t.Localizacao)
-                           .Include(t => t.TipoServico).Select(t => new EventsScheduler()
+                            .Select(t => new EventsScheduler()
                            {
-
+                               Id=t.Id,
                                Location = t.Localizacao.Descrição,
-                               Subject = t.Colaborador.Nome  + "-"  + t.TipoServico.Descrição,
+                               Subject = t.Colaborador.Nome,
                                Obs=t.Obs,
                                StartTime=t.StartDate,
                                EndTime=t.EndDate,
-                               IsAllDay=true,
-                               isBlock=true
+                               IsAllDay=false,
+                               isBlock=false
 
 
                            }).ToList();

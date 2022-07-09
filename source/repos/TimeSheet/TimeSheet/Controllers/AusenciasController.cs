@@ -102,12 +102,10 @@ namespace TimeSheet.Controllers
                 TimeSpan StartTime = Evento.StartDate.TimeOfDay;
                 TimeSpan EndTime = Evento.EndDate.TimeOfDay;
                 DateTime date = DateTime.Parse(Evento.Date);
-
+                Evento.EventType = EnumEventType.Férias;
                 Evento.StartDate = date.Date.Add(StartTime);
                 Evento.EndDate = date.Date.Add(EndTime);
-                Evento.IdCliente = Guid.Parse("21b713a5-ff72-4785-9421-96ac488c7c66");
                 Evento.IdLocalizacao = Guid.Parse("e817b372-63a6-48ac-a856-cc0d3fef368d");
-                Evento.IdTipoServico = Guid.Parse("4c1c5496-39b3-47af-919a-34a48b4d97f0");
                 EventoRepository.SaveEvento(Evento);
                 return AnswerClientServer.GetSuccessAnswerWithMessage("Sucesso");
             }

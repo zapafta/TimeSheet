@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Enum
 {
-    public enum EnumStatus
+    public enum EnumEventType
     {
-        Rejeitado = 0,
-        Solicitado = 1,
-        Agendado = 2,
-        Decorrer = 3,
-        Concluido = 4,
+        Férias = 0
     }
 }

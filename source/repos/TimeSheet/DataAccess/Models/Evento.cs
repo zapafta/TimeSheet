@@ -11,7 +11,6 @@ namespace DataAccess.Models
 {
     public class Evento
     {
-
         [Key]
         [Display(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,39 +29,25 @@ namespace DataAccess.Models
         [Display(Order = 3)]
         public DateTime EndDate { get; set; }
 
-        [Display(Order = 4)]
-        [Required(ErrorMessage = "Cliente is required")]
-        [ForeignKey("Cliente")]
-        public Guid IdCliente { get; set; }
-        public Cliente Cliente { get; set; }
-
         [Display(Order = 5)]
         [Required(ErrorMessage = "Localizacao is required")]
         [ForeignKey("Localizacao")]
         public Guid IdLocalizacao { get; set; }
         public Localizacao Localizacao { get; set; }
 
-        [Display(Order = 6)]
-        [Required(ErrorMessage = "TipoServico is required")]
-        [ForeignKey("TipoServico")]
-        public Guid IdTipoServico { get; set; }
-        public TipoServico TipoServico { get; set; }
-
         [Display(Order = 7)]
         [Required(ErrorMessage = "Obs is required")]
         public string Obs { get; set; }
-
-        [Display(Order = 8)]
-        [Required(ErrorMessage = "Rating is required")]
-        public EnumRating Rating { get; set; }
-
 
         [Display(Order =9)]
         [Required(ErrorMessage = "Status is required")]
         public EnumStatus Status { get; set; }
 
-
         [Display(Order = 10)]
+        [Required(ErrorMessage = "EventType is required")]
+        public EnumEventType EventType { get; set; }
+
+        [Display(Order = 11)]
         [Required(ErrorMessage = "Colaborador is required")]
         [ForeignKey("Colaborador")]
         public Guid IdColaborador { get; set; }
@@ -70,9 +55,6 @@ namespace DataAccess.Models
 
         [NotMapped]
         public string Date { get; set; }
-  
-
-
 
     }
 }

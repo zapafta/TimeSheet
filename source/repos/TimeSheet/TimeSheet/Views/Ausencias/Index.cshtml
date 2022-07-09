@@ -15,14 +15,7 @@ background-color: #80808085 !important;
 
 }
 
-@{
-    var dataManager = new DataManager() {
-        Url = "Ausencias/Url",
-        Adaptor = "UrlAdaptor",
-        CrudUrl = "Ausencias/UpdateData",
-        CrossDomain = true
-    };
-}
+
 
 </style>
 
@@ -44,18 +37,18 @@ background-color: #80808085 !important;
       
                 <ejs-schedule id="schedule" width="Auto"  height="800" 
                               locale="en-150"
-                              startHour="8:00"
+                           
                               showWeekNumber="true"
                               cellClick="cellClickscheduler"
                               showTimeIndicator="true"
                               enableAllDayScroll="true"
                               IsResponsive="true"
-                              endHour="20:00"
+                       
                               workDays="WorkDays"
                               selectedDate="DateTime.Now">
 
                               
-            <e-schedule-eventsettings dataSource="dataManager">
+            <e-schedule-eventsettings dataSource="@Model.ListEvents">
             </e-schedule-eventsettings>
                      <e-schedule-views>
                     <e-schedule-view option="TimelineYear" displayName="Ano"></e-schedule-view>
@@ -63,7 +56,7 @@ background-color: #80808085 !important;
                     <e-schedule-view option="Week" displayName="Semana" ></e-schedule-view>
                 </e-schedule-views>
 
-                    <e-schedule-eventsettings dataSource="dataManager" id="Id">
+                 <e-schedule-eventsettings dataSource="@Model.ListEvents">
                         <e-eventsettings-fields>
                             <e-field-subject title="Tipo" name="Subject"></e-field-subject>
                             <e-field-location title="Localização" name="Location"></e-field-location>
@@ -238,21 +231,18 @@ background-color: #80808085 !important;
             function onPopupOpen(args) {
 
 
-
-
-            @*    if (args.type === 'Editor') {
-
+                if (args.type === 'Editor') {
                     var DialogInternal = document.getElementById('DialogInternal').ej2_instances[0];
                     DialogInternal.show();
 
                     args.cancel = true;
-                }*@
+                }
             }
 
             function cellClickscheduler(args) {
 
 
-@*
+
                 var StartTime = args.startTime.toLocaleTimeString(navigator.language, {
                     hour: '2-digit',
                     minute: '2-digit'
@@ -269,7 +259,7 @@ background-color: #80808085 !important;
                 var DialogInternal = document.getElementById('DialogInternal').ej2_instances[0];
                 DialogInternal.show();
                 args.cancel = true;
-                *@
+                
             }
 
 
